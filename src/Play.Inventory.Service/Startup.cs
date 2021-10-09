@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Play.Common.MongoDB;
 using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Entities;
+using Polly;
 
 namespace Play.Inventory.Service
 {
@@ -32,7 +33,9 @@ namespace Play.Inventory.Service
             {
                 client.BaseAddress = new Uri("https://localhost:5001");
                                 
-            }).ConfigurePrimaryHttpMessageHandler(serviceProvider => clientHandler);
+            })
+            .ConfigurePrimaryHttpMessageHandler(serviceProvider => clientHandler)
+            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1)); // timeout after 1 second
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
