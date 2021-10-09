@@ -49,3 +49,6 @@
 /home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/obj/Debug/net5.0/ref/Play.Inventory.Service.dll
 /home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/obj/Debug/net5.0/Play.Inventory.Service.pdb
 /home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/obj/Debug/net5.0/Play.Inventory.Service.genruntimeconfig.cache
+/home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/bin/Debug/net5.0/Microsoft.Extensions.Http.Polly.dll
+/home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/bin/Debug/net5.0/Polly.dll
+/home/tak/ownDev/Play/Play.Inventory/src/Play.Inventory.Service/bin/Debug/net5.0/Polly.Extensions.Http.dll

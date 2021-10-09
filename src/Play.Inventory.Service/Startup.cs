@@ -10,6 +10,7 @@ using Play.Common.MongoDB;
 using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Entities;
 using Polly;
+using Polly.Timeout;
 
 namespace Play.Inventory.Service
 {
@@ -35,6 +36,11 @@ namespace Play.Inventory.Service
                                 
             })
             .ConfigurePrimaryHttpMessageHandler(serviceProvider => clientHandler)
+            .AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))) // exponential timeout
+            .AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().CircuitBreakerAsync(
+                3,
+                TimeSpan.FromSeconds(15)
+            ))
             .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1)); // timeout after 1 second
 
             services.AddControllers();
